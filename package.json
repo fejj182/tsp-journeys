@@ -1,0 +1,19 @@
+{
+  "name": "journeys",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "nodemon": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "interrail": "^3.0.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}
