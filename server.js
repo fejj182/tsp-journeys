@@ -10,7 +10,7 @@ app.get('/journeys/:startId/:endId', (req, res) => {
   const journey = req.params
   journeys.get(journey.startId, journey.endId)
   .then((response) => {
-    res.send(response);
+    res.json(response);
   })
 })
 
