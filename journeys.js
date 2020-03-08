@@ -9,7 +9,6 @@ const get = (startId, endId) => {
       duration: timeMs / 1000 / 60
     }
   })
-  .catch(e => e)
 }
 
 exports.get = get
