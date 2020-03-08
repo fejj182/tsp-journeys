@@ -3,17 +3,13 @@ const interrail = require('interrail')
 const get = (startId, endId) => {
   return interrail.journeys(startId, endId, {transfers: 0, results: 1})
   .then(response => {
-    const journey = response[0]  
+    const journey = response[0].legs[0]
+    const timeMs = new Date(journey.arrival) - new Date(journey.departure)
     return {
-      journeyTime: journeyTime(journey.legs[0].departure, journey.legs[0].arrival)
+      duration: timeMs / 1000 / 60
     }
   })
   .catch(e => e)
-}
-
-const journeyTime = (departure, arrival) => {
-  const timeMs = new Date(arrival) - new Date(departure)
-  return timeMs / 1000 / 60
 }
 
 exports.get = get
