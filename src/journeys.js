@@ -1,7 +1,10 @@
 const interrail = require('interrail')
 
-const get = (startId, endId) => {
-  return interrail.journeys(startId, endId, {transfers: 0, results: 1})
+const getJourneyDuration = (startId, endId) => {
+  return interrail.journeys(startId, endId, {
+    transfers: 0, 
+    results: 1
+  })
   .then(response => {
     let duration = 0
 
@@ -15,7 +18,7 @@ const get = (startId, endId) => {
   })
 }
 
-const capture =  (startId, endId) => {
+const captureConnection =  (startId, endId) => {
   return interrail.journeys(startId, endId, {
     transfers: 1, 
     results: 1
@@ -34,6 +37,6 @@ const capture =  (startId, endId) => {
 }
 
 module.exports = {
-  get,
-  capture
+  getJourneyDuration,
+  captureConnection
 }

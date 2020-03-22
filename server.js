@@ -2,17 +2,17 @@ const express = require('express')
 const app = express()
 const port = 3000
 
-const journeys = require('./journeys')
+const journeys = require('./src/journeys')
 
 const server = app.listen(port, function() {
-  console.log('Listening :)');
+  console.log(`Listening on ${port} :)`);
 });
 
 app.get('/', (req, res) => res.send('A-ok'))
 
 app.get('/journeys/:startId/:endId', (req, res) => {
   const journey = req.params
-  journeys.get(journey.startId, journey.endId)
+  journeys.getJourneyDuration(journey.startId, journey.endId)
   .then((response) => {
     res.json(response);
   })
@@ -27,7 +27,7 @@ app.get('/journeys/:startId/:endId', (req, res) => {
 
 app.get('/journeys/:startId/:endId/capture', (req, res) => {
   const journey = req.params
-  journeys.capture(journey.startId, journey.endId)
+  journeys.captureConnection(journey.startId, journey.endId)
   .then((response) => {
     res.json(response);
   })
