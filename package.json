@@ -14,10 +14,13 @@
     "interrail": "^3.0.4"
   },
   "devDependencies": {
+    "husky": "^4.2.3",
     "jest": "^25.1.0",
     "nodemon": "^2.0.2"
   },
-  "gitHooks": {
-    "pre-commit": "jest"
+  "husky": {
+    "hooks": {
+      "pre-commit": "jest"
+    }
   }
 }
