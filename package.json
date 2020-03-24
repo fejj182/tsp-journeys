@@ -16,5 +16,8 @@
   "devDependencies": {
     "jest": "^25.1.0",
     "nodemon": "^2.0.2"
+  },
+  "gitHooks": {
+    "pre-commit": "jest"
   }
 }

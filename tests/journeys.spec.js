@@ -7,10 +7,34 @@ jest.mock('interrail', () => ({
 
 describe('journeys', () => {
     describe('getJourneyDuration', () => {
+        let nextMonday
+        beforeEach(() => {
+            nextMonday = new Date("February 22, 2016 09:00:00")
+        });
         it('should call api with correct parameters', async () => {
             mockResponse()
+            mockDateNow()
+            
             journeys.getJourneyDuration(123, 456);
-            expect(interrail.journeys).toHaveBeenCalledWith(123, 456, { transfers: 0, results: 1 });
+            
+            expect(interrail.journeys).toHaveBeenCalledWith(123, 456, { 
+                transfers: 0, 
+                results: 1,
+                departureAfter: nextMonday
+            });
+        });
+
+        it('should use next monday even if today is monday', async () => {
+            mockResponse()
+            mockDateNow(new Date("February 15, 2016 09:00:00"))
+            
+            journeys.getJourneyDuration(123, 456);
+            
+            expect(interrail.journeys).toHaveBeenCalledWith(123, 456, { 
+                transfers: 0, 
+                results: 1,
+                departureAfter: nextMonday
+            });
         });
 
         it('should return duration', async () => {
@@ -36,6 +60,18 @@ const mockResponse = () => {
             }]
         }
     ])))
+}
+
+const mockDateNow = (now = null) => {
+    if (!now) {
+        now = new Date("February 15, 2016 09:00:00");
+        const zeroToSix = Math.floor(Math.random() * 7);
+        now.setDate(now.getDate() + zeroToSix); 
+    }
+
+    jest
+        .spyOn(global.Date, 'now')
+        .mockImplementationOnce(() => now.valueOf() );
 }
 
 const mockEmptyResponse = () => {
