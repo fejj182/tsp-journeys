@@ -23,7 +23,8 @@ const captureConnection = (startId, endId) => {
   return interrail
     .journeys(startId, endId, {
       transfers: 1,
-      results: 1
+      results: 1,
+      departureAfter: nextMonday()
     })
     .then(response => {
       if (response.length > 0) {
@@ -51,6 +52,7 @@ const nextMonday = () => {
   }
 
   now.setDate(now.getDate() + daysLeftTillMonday);
+  now.setHours(9);
   return now;
 };
 
