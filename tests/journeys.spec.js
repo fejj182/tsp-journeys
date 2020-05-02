@@ -9,7 +9,7 @@ describe("journeys", () => {
   describe("getJourneyDuration", () => {
     let nextMonday;
     beforeEach(() => {
-      nextMonday = new Date("February 22, 2016 09:00:00");
+      nextMonday = new Date("February 22, 2016 06:00:00");
     });
     it("should call api with correct parameters", async () => {
       mockResponse();

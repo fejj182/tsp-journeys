@@ -52,7 +52,7 @@ const nextMonday = () => {
   }
 
   now.setDate(now.getDate() + daysLeftTillMonday);
-  now.setHours(9);
+  now.setHours(6);
   return now;
 };
 
