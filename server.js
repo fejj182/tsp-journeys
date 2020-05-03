@@ -10,7 +10,20 @@ const server = app.listen(port, function() {
 
 app.get('/', (req, res) => res.send('A-ok'))
 
+app.get('/stations/:name', (req, res) => {
+  stations.getStationByName(req.params.name)
+  .then(response => res.json(response))
+})
+
 app.get('/journeys/:startId/:endId', (req, res) => {
+  const journey = req.params
+  journeys.getJourneys(journey.startId, journey.endId)
+  .then((response) => {
+    res.json(response);
+  })
+})
+
+app.get('/journeys/:startId/:endId/duration', (req, res) => {
   const journey = req.params
   journeys.getJourneyDuration(journey.startId, journey.endId)
   .then((response) => {

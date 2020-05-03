@@ -1,5 +1,13 @@
 const interrail = require("interrail");
 
+const getJourneys = (startId, endId) => {
+  return interrail.journeys(startId, endId, {
+    transfers: 0,
+    results: 1,
+    departureAfter: nextMonday()
+  });
+};
+
 const getJourneyDuration = (startId, endId) => {
   return interrail
     .journeys(startId, endId, {
@@ -57,6 +65,7 @@ const nextMonday = () => {
 };
 
 module.exports = {
+  getJourneys,
   getJourneyDuration,
   captureConnection
 };
